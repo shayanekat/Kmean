@@ -28,12 +28,12 @@ for l in f.readlines():
 data = np.array(data)
 
 # plot raw data
-plt.scatter(data[:, 0], data[:, 1])
-plt.axis("equal")
-plt.title("Raw data")
-plt.xlabel("latitude")
-plt.ylabel("longitude")
-plt.show()
+# plt.scatter(data[:, 0], data[:, 1])
+# plt.axis("equal")
+# plt.title("Raw data")
+# plt.xlabel("latitude")
+# plt.ylabel("longitude")
+# plt.show()
 
 # usefull functions
 def distance(point, cluster):
@@ -126,7 +126,6 @@ while StopCondition(means, newmean, limit):
     for i in range(k):
         newmean.append(GetMiddle(clusters[i]))
     s += 1
-
 
 # display
 for clust in clusters:
