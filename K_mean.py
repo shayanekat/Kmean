@@ -16,6 +16,7 @@ import random
 # initialize variables
 k = 5
 means = np.array([[random.randint(-6, 11), random.randint(40, 52)] for i in range(k)]) # start of means
+M = [means]
 limit = 0.01
 
 # extract data
@@ -28,12 +29,13 @@ for l in f.readlines():
 data = np.array(data)
 
 # plot raw data
-# plt.scatter(data[:, 0], data[:, 1])
-# plt.axis("equal")
-# plt.title("Raw data")
-# plt.xlabel("latitude")
-# plt.ylabel("longitude")
-# plt.show()
+raw = plt.figure(1)
+plt.scatter(data[:, 0], data[:, 1])
+plt.axis("equal")
+plt.title("Raw data")
+plt.xlabel("latitude")
+plt.ylabel("longitude")
+raw.show()
 
 # usefull functions
 def distance(point, cluster):
@@ -105,6 +107,7 @@ newmean = []
 for i in range(k):
     newmean.append(GetMiddle(clusters[i]))
 s += 1
+M.append(newmean)
 
 # test condition and repeat
 while StopCondition(means, newmean, limit):
@@ -126,8 +129,10 @@ while StopCondition(means, newmean, limit):
     for i in range(k):
         newmean.append(GetMiddle(clusters[i]))
     s += 1
+    M.append(newmean)
 
 # display
+clus = plt.figure(2)
 for clust in clusters:
     c = np.array(clust)
     try:
@@ -140,4 +145,17 @@ plt.legend()
 plt.title("Clusterd data")
 plt.xlabel("latitude")
 plt.ylabel("longitude")
-plt.show()
+clus.show()
+
+# Means evolution plot
+M = np.array(M)
+
+mea = plt.figure(3)
+for i in range(k):
+    plt.plot(M[:, i, 0], M[:, i, 1], "*-")
+plt.title("Evolution of means points")
+plt.xlabel("latitude")
+plt.ylabel("longitude")
+mea.show()
+
+input()
