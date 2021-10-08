@@ -27,6 +27,7 @@ for l in f.readlines():
     line[-1] = line[-1][:-1]
     data.append([float(line[0]), float(line[1])])
 data = np.array(data)
+f.close()
 
 # plot raw data
 raw = plt.figure(1)
